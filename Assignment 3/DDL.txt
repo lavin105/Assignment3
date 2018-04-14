@@ -1,0 +1,44 @@
+CREATE TABLE Person
+(
+    Person_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    FirstName VARCHAR(30),
+    LastName VARCHAR(30)
+);
+
+CREATE TABLE Credentials
+(
+  Credential_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Person_ID INT ,
+    SSN LONG,
+    Email VARCHAR(30),
+  FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID)
+);
+
+CREATE TABLE Work
+(
+  Work_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Person_ID INT ,
+    BusinessName VARCHAR(64),
+    BusinessAddress VARCHAR(90),
+    BusinessCity VARCHAR(30),
+  FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID)
+);
+
+CREATE TABLE Residence
+(
+  Residence_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  Person_ID INT,
+  Address VARCHAR(90),
+  City VARCHAR(30),
+  FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID)
+
+);
+
+CREATE TABLE Hobby
+(
+  Hobby_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  Person_ID INT,
+  Activity VARCHAR(40),
+  FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID)
+
+);
