@@ -3,13 +3,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MainDataLoader {
-
+     static Connection con;
     public static void main (String args[]) {
 
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Assignment3?useSSL=false", "lavin105", "Lavin105@m.c.edu");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Assignment3?useSSL=false", "lavin105", "Lavin105@m.c.edu");
             if(args.length==0){
                 System.out.println("Please provide the file path as a command line argument");
             }else{
@@ -30,6 +30,12 @@ public class MainDataLoader {
             System.out.println(e.getMessage());
         } catch (ClassNotFoundException f) {
             f.printStackTrace();
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 
