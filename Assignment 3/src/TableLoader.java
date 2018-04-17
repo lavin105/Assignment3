@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TableLoader {
+    //variable declarations
      private String filePath;
      private Connection con;
      private int Person_ID;
-
+    //TableLoader Constructor
     public TableLoader(String _filePath, Connection _con){
         filePath=_filePath;
         con=_con;
@@ -21,7 +22,7 @@ public class TableLoader {
 
 
     public void loadAll(){
-
+        //SQL queries to be used
         String sql="INSERT INTO Person(FirstName, LastName) VALUES(?,?)";
         String sql2="INSERT INTO Credentials(Person_ID,SSN, Email) VALUES(?,?,?)";
         String sql3="INSERT INTO Work(Person_ID,BusinessName,BusinessAddress,BusinessCity) VALUES(?,?,?,?)";
@@ -30,10 +31,13 @@ public class TableLoader {
 
 
         try {
+            //use a csv reader
             Reader in=new FileReader(filePath);
             Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
             int count=0;
+            //for each records in the file insert the data into particular tables
             for (CSVRecord record:records) {
+                //ignore the first line because it is column attributes
                 if (count>0){
                     //inserts into the person table
                     String firstName = record.get(0);
@@ -42,6 +46,7 @@ public class TableLoader {
                     ps.setString(1, firstName);
                     ps.setString(2, lastName);
                     ps.executeUpdate();
+                    //Resultset for getting the generated keys
                     ResultSet rs_key = ps.getGeneratedKeys();
                     if (rs_key.next()) {
                         Person_ID = rs_key.getInt(1);
@@ -85,6 +90,7 @@ public class TableLoader {
 
 
                 }
+                //increment the count to know when the first line has been skipped
                 count++;
             }
 
