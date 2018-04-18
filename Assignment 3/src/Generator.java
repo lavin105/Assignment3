@@ -40,10 +40,9 @@ public class Generator {
             s.append(',');
             s.append("Address City");
             s.append(',');
-            s.append("Hobby");
+            s.append("Birthday");
             s.append("\n");
-            String[] hobby={"Golf", "Surfing", "Soccer", "Running", "Swimming", "Football", "Basketball", "Fishing", "Hunting"};
-            //creating n number of tples specified by the user
+            //creating n number of tuples specified by the user
             for (int i = 0; i < tuple; i++) {
                 double number=100000000+num.nextInt(999999990);
 
@@ -65,7 +64,7 @@ public class Generator {
                 s.append(',');
                 s.append(df.getCity());
                 s.append(',');
-                s.append(df.getItem(hobby));
+                s.append(df.getBirthDate());
                 s.append("\n");
             }
             //writing the string builder to the the csv file

@@ -27,7 +27,7 @@ public class TableLoader {
         String sql2="INSERT INTO Credentials(Person_ID,SSN, Email) VALUES(?,?,?)";
         String sql3="INSERT INTO Work(Person_ID,BusinessName,BusinessAddress,BusinessCity) VALUES(?,?,?,?)";
         String sql4="INSERT INTO Residence(Person_ID,Address,City) VALUES(?,?,?)";
-        String sql5="INSERT INTO Hobby(Person_ID,Activity) VALUES(?,?)";
+        String sql5="INSERT INTO DOB(Person_ID,Birthday) VALUES(?,?)";
 
 
         try {
@@ -82,10 +82,10 @@ public class TableLoader {
                     ps4.executeUpdate();
 
                     //inserts into the hobby table
-                    String hobby = record.get(9);
+                    String bday = record.get(9);
                     PreparedStatement ps5=con.prepareStatement(sql5);
                     ps5.setInt(1, Person_ID);
-                    ps5.setString(2, hobby);
+                    ps5.setString(2, bday);
                     ps5.executeUpdate();
 
 
@@ -98,6 +98,12 @@ public class TableLoader {
             System.out.println(e.getMessage());
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
     }
