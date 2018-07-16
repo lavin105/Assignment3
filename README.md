@@ -1,2 +1,4 @@
 # Assignment3
-Assignment 3 for CPSC-408
+Java and MySQL data generator and loader.
+
+Fake data is generated and then can be uploaded to a MySQL database.
